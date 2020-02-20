@@ -1,7 +1,7 @@
-Single Cell Visualizer instructions
+# Single Cell Visualizer instructions
 
-Make sure you have install the packages "Seurat", "shiny", "ggplot2" and "plotly".
+## Running
 
-Run the entire scRNAviz-app.R script in Rstudio
-
-Add comments/bugs/requests to feedback.xls
+```bash
+docker run -d -p 3838:3838 -v scRNAviz/:/srv/shiny-server --name shiny brickmanlab/scrnaviz:0.1
+```
