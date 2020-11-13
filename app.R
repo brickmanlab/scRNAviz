@@ -17,8 +17,8 @@ rna_datasets <- list(messmer_et_al_2019 = "./data/messmer_et_al_2019.rds",
                      nowotschin_et_al_2019 = "./data/nowotschin_et_al_2019.rds",
                      posfai_et_al_2017 = "./data/posfai_et_al_2017.rds",
                      stirparo_et_al_2018 = "./data/stirparo_et_al_2018.rds",
-                     sara = "./data/sara-processed.rds",
-                     alba = "./data/alba-processed.rds"
+                     sara = "./data/sara_processed.rds",
+                     alba = "./data/alba_processed.rds"
 )
 
 # Define UI for dataset viewer app ----
