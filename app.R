@@ -17,7 +17,8 @@ rna_datasets <- list(messmer_et_al_2019 = "./data/messmer_et_al_2019.rds",
                      nowotschin_et_al_2019 = "./data/nowotschin_et_al_2019.rds",
                      posfai_et_al_2017 = "./data/posfai_et_al_2017.rds",
                      stirparo_et_al_2018 = "./data/stirparo_et_al_2018.rds",
-                     sara = "./data/sara-processed.rds"
+                     sara = "./data/sara-processed.rds",
+                     alba = "./data/alba-processed.rds"
 )
 
 # Define UI for dataset viewer app ----
@@ -44,7 +45,8 @@ ui <- fluidPage(
                                        "Nowotschin et al. (2019)",
                                        "Posfai et al. (2017)",
                                        "Stirparo et al. (2018)",
-                                       "Sara")),
+                                       "Sara",
+                                       "Alba")),
             
             hr(),
             conditionalPanel(
@@ -153,7 +155,8 @@ server <- function(input, output, session) {
                "Nowotschin et al. (2019)" = readRDS(rna_datasets$nowotschin_et_al_2019),
                "Posfai et al. (2017)" = readRDS(rna_datasets$posfai_et_al_2017),
                "Stirparo et al. (2018)" = readRDS(rna_datasets$stirparo_et_al_2018),
-               "Sara" = readRDS(rna_datasets$sara)
+               "Sara" = readRDS(rna_datasets$sara),
+               "Alba" = readRDS(rna_datasets$alba)
         )
     })
     
