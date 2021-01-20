@@ -10,16 +10,16 @@ init_empty <- list(
     placeholder = 'Please select an option below',
     onInitialize = I('function() { this.setValue(""); }'))
 
-rna_datasets <- list(messmer_et_al_2019 = "./data/messmer_et_al_2019.rds",
-                     deng_et_al_2014 = "./data/deng_et_al_2014.rds",
-                     mohammed_et_al_2017 = "./data/mohammed_et_al_2017.rds",
-                     nakamura_et_al_2017 = "./data/nakamura_et_al_2017.rds",
-                     nowotschin_et_al_2019 = "./data/nowotschin_et_al_2019.rds",
-                     posfai_et_al_2017 = "./data/posfai_et_al_2017.rds",
-                     stirparo_et_al_2018 = "./data/stirparo_et_al_2018.rds",
-                     sara = "./data/sara_processed.rds",
-                     alba = "./data/alba_processed.rds",
-                     HRA000280 = "./data/HRA000280_3.6.rds"
+rna_datasets <- list(messmer_et_al_2019 = "/data/messmer_et_al_2019.rds",
+                     deng_et_al_2014 = "/data/deng_et_al_2014.rds",
+                     mohammed_et_al_2017 = "/data/mohammed_et_al_2017.rds",
+                     nakamura_et_al_2017 = "/data/nakamura_et_al_2017.rds",
+                     nowotschin_et_al_2019 = "/data/nowotschin_et_al_2019.rds",
+                     posfai_et_al_2017 = "/data/posfai_et_al_2017.rds",
+                     stirparo_et_al_2018 = "/data/stirparo_et_al_2018.rds",
+                     sara = "/data/sara_processed.rds",
+                     alba = "/data/alba_processed.rds",
+                     HRA000280 = "/data/HRA000280_3.6.rds"
 )
 
 # Define UI for dataset viewer app ----
