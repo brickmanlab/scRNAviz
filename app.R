@@ -49,7 +49,8 @@ ui <- fluidPage(
                                        "Stirparo et al. (2018)",
                                        "Sara",
                                        "Alba",
-                                       "Li et al. (2020)")),
+                                       "Li et al. (2020)",
+                                       "Li et al. (2020) Endoderm only")),
             
             hr(),
             conditionalPanel(
