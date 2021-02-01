@@ -19,7 +19,8 @@ rna_datasets <- list(messmer_et_al_2019 = "./data/messmer_et_al_2019.rds",
                      stirparo_et_al_2018 = "./data/stirparo_et_al_2018.rds",
                      sara = "./data/sara_processed.rds",
                      alba = "./data/alba_processed.rds",
-                     HRA000280 = "./data/HRA000280_3.6.rds"
+                     HRA000280 = "./data/HRA000280_3.6.rds",
+                     HRA000280_endoderm = "./data/HRA000280_endoderm.rds"
 )
 
 # Define UI for dataset viewer app ----
@@ -159,7 +160,9 @@ server <- function(input, output, session) {
                "Stirparo et al. (2018)" = readRDS(rna_datasets$stirparo_et_al_2018),
                "Sara" = readRDS(rna_datasets$sara),
                "Alba" = readRDS(rna_datasets$alba),
-               "Li et al. (2020)" = readRDS(rna_datasets$HRA000280)
+               "Li et al. (2020)" = readRDS(rna_datasets$HRA000280),
+               "Li et al. (2020) Endoderm only" = readRDS(rna_datasets$HRA000280_endoderm)
+                                            
         )
     })
     
