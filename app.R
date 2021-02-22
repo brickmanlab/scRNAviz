@@ -19,7 +19,7 @@ rna_datasets <- list(messmer_et_al_2019 = "./data/messmer_et_al_2019.rds",
                      stirparo_et_al_2018 = "./data/stirparo_et_al_2018.rds",
                      sara = "./data/sara_processed.rds",
                      alba = "./data/alba_processed.rds",
-                     HRA000280 = "./data/HRA000280_3.6.rds",
+                     HRA000280 = "./data/HRA000280.rds",
                      HRA000280_endoderm = "./data/HRA000280_endoderm.rds"
 )
 
