@@ -21,7 +21,8 @@ rna_datasets <- list(messmer_et_al_2019 = "./data/messmer_et_al_2019.rds",
                      alba = "./data/alba_processed.rds",
                      HRA000280 = "./data/HRA000280.rds",
                      HRA000280_endoderm = "./data/HRA000280_endoderm.rds",
-                     rothova_et_al_2021 = "./data/rothova_et_al_2021.rds"
+                     rothova_et_al_2021 = "./data/rothova_et_al_2021.rds",
+                     feng_et_al_2020 = "./data/feng_et_al_2020.rds"
 )
 
 # Define UI for dataset viewer app ----
@@ -52,7 +53,8 @@ ui <- fluidPage(
                                        "Alba",
                                        "Li et al. (2020)",
                                        "Li et al. (2020) Endoderm only",
-                                       "Rothova et al. (2021)")
+                                       "Rothova et al. (2021)",
+                                       "Feng et al. (2020)")
             ),
             
             hr(),
@@ -166,7 +168,8 @@ server <- function(input, output, session) {
                "Alba" = readRDS(rna_datasets$alba),
                "Li et al. (2020)" = readRDS(rna_datasets$HRA000280),
                "Li et al. (2020) Endoderm only" = readRDS(rna_datasets$HRA000280_endoderm),
-               "Rothova et al. (2021)" = readRDS(rna_datasets$rothova_et_al_2021)
+               "Rothova et al. (2021)" = readRDS(rna_datasets$rothova_et_al_2021),
+               "Feng et al. (2020)" = readRDS(rna_datasets$feng_et_al_2020)
         )
     })
     
