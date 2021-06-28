@@ -35,7 +35,7 @@ ui <- fluidPage(
     sidebarLayout(
         
         # Sidebar panel for inputs ----
-        sidebarPanel(
+        sidebarPanel( width = 3,
             
             # Input: Selector for choosing dataset ----
             selectizeInput(inputId = "dataset",
@@ -64,12 +64,12 @@ ui <- fluidPage(
                 
                 
                 fluidRow(
-                    column(5,
+                    column(7,
                            selectizeInput(inputId = "viz",
                                           options = init_empty,
                                           label = "Choose a visualization method:",
-                                          choices = c("PCA","t-SNE", "UMAP"))),
-                    column(7,
+                                          choices = c("PCA","t-SNE", "UMAP")),
+
                            selectizeInput(inputId = "metadata1",
                                           label = "Choose metadata 1:",
                                           options = NULL,
