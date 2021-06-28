@@ -239,7 +239,9 @@ server <- function(input, output, session) {
         seurat_object <- datasetInput()
         viz_method <- vizInput()
         plot_title <- paste0(input$gene," expression")
-        ggplotly(FeaturePlot(seurat_object, reduction = viz_method, features = c(input$gene), sort = input$sort) + ggtitle(plot_title))
+        ggplotly(#plot_density(seurat_object, reduction = viz_method, features = c(input$gene)) + ggtitle(plot_title)
+            FeaturePlot(seurat_object, reduction = viz_method, features = c(input$gene), sort = input$sort) + ggtitle(plot_title)
+            )
         
     })
     
