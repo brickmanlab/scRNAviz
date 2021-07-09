@@ -1,5 +1,14 @@
-FROM rocker/shiny-verse:4.1.0
+FROM rocker/shiny:4.1.0
 
-RUN R -e "install.packages('BiocManager')"
-RUN R -e "BiocManager::install(c('mutoss', 'metap'))"
-RUN R -e "install.packages(c('Seurat', 'plotly', 'ggplot2'))"
+RUN apt update && apt install -y \
+    --no-install-recommends \
+    libglpk40 \
+    libxml2-dev && \
+    apt-get clean && \ 
+    rm -rf /var/lib/apt/lists/*
+
+RUN install2.r --error --skipinstalled \
+    BiocManager \
+    Seurat \
+    plotly \
+    ggplot2

@@ -1,0 +1,10 @@
+version: "3.3"
+services:
+  scrnaviz:
+    container_name: scrnaviz
+    build: .
+    ports:
+      - "3830:3838"
+    volumes:
+      - "/home/pc/Github/scRNAviz:/srv/shiny-server/"
+      - "/home/pc/Dropbox (Brickman Dropbox)/sc_seq_analysis/Blacky/services/scRNAviz/data/:/srv/shiny-server/data"
