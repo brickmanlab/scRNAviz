@@ -19,10 +19,11 @@ rna_datasets <- list(messmer_et_al_2019 = "./data/messmer_et_al_2019.rds",
                      stirparo_et_al_2018 = "./data/stirparo_et_al_2018.rds",
                      sara = "./data/sara_processed.rds",
                      alba = "./data/alba_processed.rds",
-                     HRA000280 = "./data/HRA000280.rds",
-                     HRA000280_endoderm = "./data/HRA000280_endoderm.rds",
+                     li_et_al_2020 = "./data/li_et_al_2020.rds",
+                     li_et_al_2020_endoderm = "./data/li_et_al_2020_endoderm.rds",
                      rothova_et_al_2021 = "./data/rothova_et_al_2021.rds",
-                     feng_et_al_2020 = "./data/feng_et_al_2020.rds"
+                     feng_et_al_2020 = "./data/feng_et_al_2020.rds",
+                     kolodziejczyk_et_al_2015 = "./data/kolodziejczyk_et_al_2015.rds"
 )
 
 # Define UI for dataset viewer app ----
@@ -54,7 +55,8 @@ ui <- fluidPage(
                                        "Li et al. (2020)",
                                        "Li et al. (2020) Endoderm only",
                                        "Rothova et al. (2021)",
-                                       "Feng et al. (2020)")
+                                       "Feng et al. (2020)",
+                                       "Kolodziejczyk et al. (2015)")
             ),
             
             hr(),
@@ -166,10 +168,11 @@ server <- function(input, output, session) {
                "Stirparo et al. (2018)" = readRDS(rna_datasets$stirparo_et_al_2018),
                "Sara" = readRDS(rna_datasets$sara),
                "Alba" = readRDS(rna_datasets$alba),
-               "Li et al. (2020)" = readRDS(rna_datasets$HRA000280),
-               "Li et al. (2020) Endoderm only" = readRDS(rna_datasets$HRA000280_endoderm),
+               "Li et al. (2020)" = readRDS(rna_datasets$li_et_al_2020),
+               "Li et al. (2020) Endoderm only" = readRDS(rna_datasets$li_et_al_2020_endoderm),
                "Rothova et al. (2021)" = readRDS(rna_datasets$rothova_et_al_2021),
-               "Feng et al. (2020)" = readRDS(rna_datasets$feng_et_al_2020)
+               "Feng et al. (2020)" = readRDS(rna_datasets$feng_et_al_2020),
+               "Kolodziejczyk et al. (2015)" = readRDS(rna_datasets$kolodziejczyk_et_al_2015)
         )
     })
     
