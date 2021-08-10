@@ -27,7 +27,9 @@ parse_names <- function(x){
 }
 
 ## The \\1 selects the group of the pattern. The choices vector will be used 
-choices <- str_replace(datasets_names, pattern = " (\\d{4})", replacement = parse_names("\\1"))
+choices <- gsub(names(rna_datasets), pattern = "_", replacement = " ")
+choices <- str_to_sentence(choices)
+choices <- str_replace(choices, pattern = " (\\d{4})", replacement = parse_names("\\1"))
 dataset_match <- as.list(names(rna_datasets))
 names(dataset_match) <- choices
 
