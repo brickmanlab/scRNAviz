@@ -1,14 +1,15 @@
 library(shiny)
 library(tidyverse)
 library(Seurat)
-library(ggplot2)
 library(plotly)
 
-# Defining some lists to load the datasets
+# Defining some lists that will help to load the datasets
+
 init_empty <- list(
     placeholder = 'Select an option below',
     onInitialize = I('function() { this.setValue(""); }'))
 
+# This function fetches the datasets in ./data.
 get_datasets <- function(x = "./data") {
     datasets <- list.files(path = x, pattern = "rds", full.names = T)
     datasets_names <- list.files(path = x, pattern = "rds", full.names = F)
@@ -19,16 +20,18 @@ get_datasets <- function(x = "./data") {
 
 rna_datasets <- get_datasets()
 
+# Here we parese the datasets for nicer visualization
 parse_names <- function(x){
     x <- paste0(". (",x,")")
     return(x)
 }
 
+## The \\1 selects the group of the pattern. The choices vector will be used 
 choices <- str_replace(datasets_names, pattern = " (\\d{4})", replacement = parse_names("\\1"))
 dataset_match <- as.list(names(rna_datasets))
 names(dataset_match) <- choices
 
-# Define UI for dataset viewer app ----
+# Define UI for scRNAviz app ----
 ui <- fluidPage(
     
     # App title ----
@@ -90,7 +93,7 @@ ui <- fluidPage(
                                           multiple = FALSE)),
                     
                     column(4,
-                           checkboxInput("sort","Sort cells by expression"))
+                           checkboxInput("sort","Sort cells by how are expression"))
                 ))
         ),
         
@@ -195,8 +198,6 @@ server <- function(input, output, session) {
         } else {
             ggplotly(FeaturePlot(seurat_object, reduction = viz_method, features = input$metadata1) + ggtitle(input$metadata1))
         }
-        
-        
     }) 
     
     output$metadata2Plot <- renderPlotly({
@@ -210,7 +211,6 @@ server <- function(input, output, session) {
         } else {
             ggplotly(FeaturePlot(seurat_object, reduction = viz_method, features = input$metadata2) + ggtitle(input$metadata2))
         }
-        
     })
     
     output$genePlot <- renderPlotly({
@@ -221,7 +221,6 @@ server <- function(input, output, session) {
         ggplotly(#plot_density(seurat_object, reduction = viz_method, features = c(input$gene)) + ggtitle(plot_title)
             FeaturePlot(seurat_object, reduction = viz_method, features = c(input$gene), order = input$sort) + ggtitle(plot_title)
             )
-        
     })
     
     output$metadata1VlnPlot <- renderPlotly({
@@ -279,7 +278,6 @@ server <- function(input, output, session) {
     #  head(datasetInput(), n = input$obs)
     #})
 }
-
 
 # Create Shiny app ----
 shinyApp(ui = ui, server = server)
