@@ -1,30 +1,32 @@
 library(shiny)
+library(tidyverse)
 library(Seurat)
 library(ggplot2)
 library(plotly)
 
-
-# setwd(dirname(rstudioapi::getSourceEditorContext()$path))
-
+# Defining some lists to load the datasets
 init_empty <- list(
-    placeholder = 'Please select an option below',
+    placeholder = 'Select an option below',
     onInitialize = I('function() { this.setValue(""); }'))
 
-rna_datasets <- list(messmer_et_al_2019 = "./data/messmer_et_al_2019.rds",
-                     deng_et_al_2014 = "./data/deng_et_al_2014.rds",
-                     mohammed_et_al_2017 = "./data/mohammed_et_al_2017.rds",
-                     nakamura_et_al_2017 = "./data/nakamura_et_al_2017.rds",
-                     nowotschin_et_al_2019 = "./data/nowotschin_et_al_2019.rds",
-                     posfai_et_al_2017 = "./data/posfai_et_al_2017.rds",
-                     stirparo_et_al_2018 = "./data/stirparo_et_al_2018.rds",
-                     sara = "./data/sara_processed.rds",
-                     alba = "./data/alba_processed.rds",
-                     li_et_al_2020 = "./data/li_et_al_2020.rds",
-                     li_et_al_2020_endoderm = "./data/li_et_al_2020_endoderm.rds",
-                     rothova_et_al_2021 = "./data/rothova_et_al_2021.rds",
-                     feng_et_al_2020 = "./data/feng_et_al_2020.rds",
-                     kolodziejczyk_et_al_2015 = "./data/kolodziejczyk_et_al_2015.rds"
-)
+get_datasets <- function(x = "./data") {
+    datasets <- list.files(path = x, pattern = "rds", full.names = T)
+    datasets_names <- list.files(path = x, pattern = "rds", full.names = F)
+    datasets_names <- gsub(datasets_names, pattern = ".rds", replacement = "")
+    names(datasets) <- datasets_names
+    return(as.list(datasets))
+}
+
+rna_datasets <- get_datasets()
+
+parse_names <- function(x){
+    x <- paste0(". (",x,")")
+    return(x)
+}
+
+choices <- str_replace(datasets_names, pattern = " (\\d{4})", replacement = parse_names("\\1"))
+dataset_match <- as.list(names(rna_datasets))
+names(dataset_match) <- choices
 
 # Define UI for dataset viewer app ----
 ui <- fluidPage(
@@ -43,20 +45,7 @@ ui <- fluidPage(
                            label = "Dataset:",
                            options = init_empty,
                            multiple = FALSE,
-                           choices = c("Messmer et al. (2019)",
-                                       "Deng et al. (2014)",
-                                       "Mohammned et al. (2017)",
-                                       "Nakamura et al. (2017)",
-                                       "Nowotschin et al. (2019)",
-                                       "Posfai et al. (2017)",
-                                       "Stirparo et al. (2018)",
-                                       "Sara",
-                                       "Alba",
-                                       "Li et al. (2020)",
-                                       "Li et al. (2020) Endoderm only",
-                                       "Rothova et al. (2021)",
-                                       "Feng et al. (2020)",
-                                       "Kolodziejczyk et al. (2015)")
+                           choices = choices
             ),
             
             hr(),
@@ -101,7 +90,7 @@ ui <- fluidPage(
                                           multiple = FALSE)),
                     
                     column(4,
-                           checkboxInput("sort","Sort cells"))
+                           checkboxInput("sort","Sort cells by expression"))
                 ))
         ),
         
@@ -147,6 +136,7 @@ ui <- fluidPage(
     )
 )
 
+
 # Define server logic to summarize and view selected dataset ----
 server <- function(input, output, session) {
     
@@ -156,24 +146,10 @@ server <- function(input, output, session) {
     #
     # 1. It is only called when the inputs it depends on changes
     # 2. The computation and result are shared by all the callers,
-    #    i.e. it only executes a single time
+    # #    i.e. it only executes a single time
+    
     datasetInput <- reactive({
-        switch(input$dataset,
-               "Messmer et al. (2019)" = readRDS(rna_datasets$messmer_et_al_2019),
-               "Deng et al. (2014)" = readRDS(rna_datasets$deng_et_al_2014),
-               "Mohammned et al. (2017)" = readRDS(rna_datasets$mohammed_et_al_2017),
-               "Nakamura et al. (2017)" = readRDS(rna_datasets$nakamura_et_al_2017),
-               "Nowotschin et al. (2019)" = readRDS(rna_datasets$nowotschin_et_al_2019),
-               "Posfai et al. (2017)" = readRDS(rna_datasets$posfai_et_al_2017),
-               "Stirparo et al. (2018)" = readRDS(rna_datasets$stirparo_et_al_2018),
-               "Sara" = readRDS(rna_datasets$sara),
-               "Alba" = readRDS(rna_datasets$alba),
-               "Li et al. (2020)" = readRDS(rna_datasets$li_et_al_2020),
-               "Li et al. (2020) Endoderm only" = readRDS(rna_datasets$li_et_al_2020_endoderm),
-               "Rothova et al. (2021)" = readRDS(rna_datasets$rothova_et_al_2021),
-               "Feng et al. (2020)" = readRDS(rna_datasets$feng_et_al_2020),
-               "Kolodziejczyk et al. (2015)" = readRDS(rna_datasets$kolodziejczyk_et_al_2015)
-        )
+        data <- readRDS(rna_datasets[[dataset_match[[input$dataset]]]])
     })
     
     vizInput <- reactive({
@@ -243,7 +219,7 @@ server <- function(input, output, session) {
         viz_method <- vizInput()
         plot_title <- paste0(input$gene," expression")
         ggplotly(#plot_density(seurat_object, reduction = viz_method, features = c(input$gene)) + ggtitle(plot_title)
-            FeaturePlot(seurat_object, reduction = viz_method, features = c(input$gene), sort = input$sort) + ggtitle(plot_title)
+            FeaturePlot(seurat_object, reduction = viz_method, features = c(input$gene), order = input$sort) + ggtitle(plot_title)
             )
         
     })
