@@ -1,8 +1,8 @@
 version: "3.3"
 services:
   scrnaviz:
+    image: ghcr.io/brickmanlab/scrnaviz:dev
     container_name: scrnaviz
-    build: .
     ports:
       - "3830:3838"
     volumes:
