@@ -11,4 +11,5 @@ RUN install2.r --error --skipinstalled \
     BiocManager \
     Seurat \
     plotly \
-    ggplot2
+    ggplot2 \
+    tidyverse
