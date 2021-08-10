@@ -95,7 +95,7 @@ ui <- fluidPage(
                                           multiple = FALSE)),
                     
                     column(4,
-                           checkboxInput("sort","Sort cells by how are expression"))
+                           checkboxInput("sort","Sort cells by expression"))
                 ))
         ),
         
